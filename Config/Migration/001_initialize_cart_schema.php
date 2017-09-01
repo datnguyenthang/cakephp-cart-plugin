@@ -25,6 +25,7 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'name' => array('type' => 'string', 'null' => true, 'default' => null),
 					'total' => array('type' => 'float', 'null' => true, 'default' => null),
 					'active' => array('type' => 'boolean', 'null' => true, 'default' => '0'),
+                    'additional_data' => array('type' => 'text', 'null' => true, 'default' => null, 'comment' => 'For serialized data'),
 					'item_count' => array('type' => 'integer', 'null' => false, 'default' => 0, 'length' => 6),
 					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 					'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -43,8 +44,9 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'street2' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128),
 					'city' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128),
 					'zip' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 128),
+                    'state' => array('type' => 'string', 'null' => true, 'default' => null, 'lenght' => 2),
 					'country' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2),
-					'type' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'comment' => 'billing or shipping'),
+					'type' => array('type' => 'string', 'null' => true, 'default' => null, 'lenght' => 16),
 					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 					'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 					'indexes' => array(
@@ -59,6 +61,8 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'foreign_key' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 36),
 					'model' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64),
 					'quantity' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 4),
+                    'quantity_limit' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 8),
+                    'additional_data' => array('type' => 'text', 'null' => true, 'default' => null, 'comment' => 'For serialized data'),
 					'name' => array('type' => 'string', 'null' => true, 'default' => null),
 					'price' => array('type' => 'float', 'null' => true, 'default' => null),
 					'virtual' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'Virtual as a download or a service'),
@@ -73,9 +77,11 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
 					'user_id' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 36),
 					'cart_id' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 36),
-					'cart_snapshop' => array('type' => 'text', 'null' => true, 'default' => null),
+					'cart_snapshot' => array('type' => 'text', 'null' => true, 'default' => null),
 					'token' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 32),
 					'processor' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64),
+                    'order_item_count' => array('type' => 'integer', 'null' => false, 'default' => '0', 'length' => 8),
+					'order_number' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64),
 					'status' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 16, 'comment' => 'internal status, up to the app'), // completed, refunded, partial-refund, cancelled, shipped
 					'payment_reference' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 16, 'status of the transaction'),
 					'payment_status' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 16, 'status of the transaction'),
@@ -83,6 +89,10 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'invoice_number' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64),
 					'billing_address' => array('type' => 'text', 'null' => true, 'default' => null),
 					'shipping_address' => array('type' => 'text', 'null' => true, 'default' => null),
+                    'shipping_address_id' => array('type' => 'string', 'null' => true, 'default' => null, 'lenght' => 36),
+					'billing_address_id' => array('type' => 'string', 'null' => true, 'default' => null, 'lenght' => 36),
+					'shipping_rate' => array('float' => 'string', 'null' => false, 'default' => 0.00),
+					'gross' => array('type' => 'float', 'null' => false, 'default' => 0.00),
 					'total' => array('type' => 'float', 'null' => true, 'default' => null),
 					'currency' => array('type' => 'integer', 'null' => true, 'default' => null),
 					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -100,6 +110,8 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 					'foreign_key' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 36),
 					'model' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 64),
 					'quantity' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 4),
+                    'total' => array('type' => 'float', 'null' => false, 'default' => 0.00, 'length' => 10,2),
+                    'additional_data' => array('type' => 'text', 'null' => true, 'default' => null, 'comment' => 'For serialized data'),
 					'name' => array('type' => 'string', 'null' => true, 'default' => null),
 					'price' => array('type' => 'float', 'null' => true, 'default' => null),
 					'virtual' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => 'Virtual as a download or a service'),
@@ -113,28 +125,6 @@ class D287dbf03fef11e1b86c0800200c9a66 extends CakeMigration {
 						'FOREIGN_KEY_INDEX' => array('column' => 'foreign_key'),
 						'ORDER_INDEX' => array('column' => 'order_id')
 					),
-				),
-				'cart_rules' => array(
-					'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
-					'name' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 255),
-					'description' => array('type' => 'string', 'null' => true, 'default' => null),
-					'type' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 255, 'comment' => 'tax, discount'),
-					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-					'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-					'indexes' => array(
-						'PRIMARY' => array('column' => 'id', 'unique' => 1)
-					)
-				),
-				'cart_rule_conditions' => array(
-					'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
-					'cart_rule_id' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 36),
-					'position' => array('type' => 'integer', 'null' => false, 'default' => '', 'length' => 2),
-					'applies_to' => array('type' => 'string', 'null' => true, 'default' => null, 'comment' => 'cart, items'),
-					'conditions' => array('type' => 'text', 'null' => true, 'default' => null),
-					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
-					'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
-					'indexes' => array(
-						'PRIMARY' => array('column' => 'id', 'unique' => 1))
 				),
 				'shipping_methods' => array(
 					'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
